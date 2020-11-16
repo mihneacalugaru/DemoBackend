@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.30611.23
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViverBackend", "ViverBackend\ViverBackend.csproj", "{924C4B6F-FD69-49F8-BC14-F1139D4FBD8C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{924C4B6F-FD69-49F8-BC14-F1139D4FBD8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{924C4B6F-FD69-49F8-BC14-F1139D4FBD8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{924C4B6F-FD69-49F8-BC14-F1139D4FBD8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{924C4B6F-FD69-49F8-BC14-F1139D4FBD8C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {EEC95425-2034-43BA-9A8A-AFECCCC212BA}
+	EndGlobalSection
+EndGlobal
