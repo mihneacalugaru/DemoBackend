@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using ViverBackend.Entities;
 using ViverBackend.Entities.Models;
 using ViverBackend.Payloads;
+using static ViverBackend.Enums;
 
 namespace ViverBackend.Controllers
 {
@@ -23,8 +25,9 @@ namespace ViverBackend.Controllers
             _db = db;
         }
 
+        // /user/getall?pageSize=50&pageNumber=2&sortType=1
         [HttpGet]
-        public ActionResult<List<User>> GetAll()
+        public ActionResult<List<User>> GetAll(int pageSize, int pageNumber, UsersSortType sortType)
         {
             var currentUser = HttpContext.User;
 
@@ -33,7 +36,27 @@ namespace ViverBackend.Controllers
                 var role = currentUser.Claims.FirstOrDefault(c => c.Type == "Role").Value;
                 if (role == "Admin")
                 {
-                    return _db.Users.ToList();
+                    // as no tracking for performance improvement when you do not need to track changes
+                    var usersQuery = _db.Users.AsNoTracking();
+
+                    if (sortType == UsersSortType.FirstNameAscendent)
+                        usersQuery = usersQuery.OrderBy(u => u.FirstName);
+                    else if (sortType == UsersSortType.FirstNameDescendent)
+                        usersQuery = usersQuery.OrderByDescending(u => u.FirstName);
+                    else if (sortType == UsersSortType.LastNameAscendent)
+                        usersQuery = usersQuery.OrderBy(u => u.LastName);
+                    else if (sortType == UsersSortType.LastNameDescendent)
+                        usersQuery = usersQuery.OrderByDescending(u => u.LastName);
+                    else
+                        usersQuery = usersQuery.OrderBy(u => u.FirstName);
+
+                    usersQuery = usersQuery
+                        .Skip((pageNumber - 1) * pageSize)
+                        .Take(pageSize);
+
+                    var users = usersQuery.ToList();
+
+                    return users;
                 }
             }
         }
