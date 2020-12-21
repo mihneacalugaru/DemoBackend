@@ -22,5 +22,9 @@ namespace ViverBackend.Entities.Models
         public string Role { get; set; }
 
         public List<Post> Posts { get; set; }
+
+        public List<Follow> FollowsUsers { get; set; }
+
+        public List<Follow> FollowedUsers { get; set; }
     }
 }
